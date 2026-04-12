@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8">
+  <title>السلة</title>
+</head>
+<body>
+
+  <h1>🛒 السلة</h1>
+  <div id="cart"></div>
+
+  <button onclick="sendWhatsApp()">إرسال الطلب عبر واتساب</button>
+
+  <script>
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+    let cartDiv = document.getElementById("cart");
+
+    let message = "السلام عليكم، أريد طلب:\n";
+
+    cart.forEach(item => {
+      cartDiv.innerHTML += `<p>${item.name} - ${item.price}$</p>`;
+      message += `- ${item.name} (${item.price}$)\n`;
+    });
+
+    function sendWhatsApp() {
+      let phone = "967781560520"; // رقمك
+      let url = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
+      window.open(url);
+    }
+  </script>
+
+</body>
+</html>
